@@ -32,6 +32,6 @@
 *.app
 
 # Miscellaneous
-/output
+output/
 *.bin
-/.cph
+.cph/

@@ -13,6 +13,8 @@
 	  "\t$0",
 	  "}\n",
 	  "int main() {",
+	  "\tios_base::sync_with_stdio(false);",
+	  "\tcin.tie(NULL);\n",
 	  "\tint T = 1;",
 	  "\tcin >> T;",
 	  "\twhile(T--){",
