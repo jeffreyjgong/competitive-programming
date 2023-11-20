@@ -1,0 +1,26 @@
+{
+	"Print to console": {
+	 "prefix": "cpp-demo",
+	 "body": [
+	  "#include<bits/stdc++.h>\n",
+	  "using ll = long long;",
+	  "using ld = long double;",
+	  "using namespace std;",
+	  "#define endl \"\\n\";",
+	  "#define ff first",
+	  "#define ss second\n",
+	  "void solve(){",
+	  "\t$0",
+	  "}\n",
+	  "int main() {",
+	  "\tint T = 1;",
+	  "\tcin >> T;",
+	  "\twhile(T--){",
+	  "\t\tsolve();",
+	  "\t}",
+	  "\treturn 0;",
+	  "}\n",
+	 ],
+	 "description": "My Demo CPP Template"
+	}
+   }
