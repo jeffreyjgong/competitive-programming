@@ -3,7 +3,7 @@
 	 "prefix": "lc",
 	 "body": [
 	  "#include<bits/stdc++.h>\n",
-	  "using namespace std;",
+	  "using namespace std;\n",
 	 ],
 	 "description": "My Demo LC Template"
 	}
