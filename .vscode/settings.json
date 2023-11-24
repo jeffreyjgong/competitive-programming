@@ -25,6 +25,8 @@
         "stacktrace": "cpp",
         "bitset": "cpp",
         "queue": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp"
     }
 }
