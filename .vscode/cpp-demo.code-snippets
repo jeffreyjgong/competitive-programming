@@ -2,10 +2,15 @@
 	"Print to console": {
 	 "prefix": "cpp-demo",
 	 "body": [
-	  "#include<bits/stdc++.h>\n",
+	  "#include<bits/stdc++.h>",
+	  "#include<ext/pb_ds/assoc_container.hpp>",
+	  "#include<ext/pb_ds/tree_policy.hpp>\n",
 	  "using ll = long long;",
 	  "using ld = long double;",
+	  "using namespace __gnu_pbds;",
 	  "using namespace std;",
+	  "template <typename T>",
+	  "using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;",
 	  "#define endl \"\\n\";",
 	  "template<typename T> inline void input(T& inVar) {cin >> inVar;}",
 	  "template<typename T, typename... S> inline void input(T& inVar, S&... args) {cin >> inVar; input(args ...);}",
