@@ -16,7 +16,6 @@ template<typename T, typename... S> inline void print(T outVar, S... args) {cout
 #define For(i, a, b) for (int i=(a); i<(b); ++i)
 #define DFor(i, a, b) for (int i=(a); i>=b; --i)
 #define ss second
-#define int ll
 #define setup() ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 
 int topdown(unordered_map<int, pair<int, int>>& adj_list, string& s, int root, unordered_map<int, int>& memo) {
@@ -96,7 +95,7 @@ void solve(){
     cout << topdown(adj_list, s, 0, memo) << endl;
 }
 
-int32_t main() {
+int main() {
     setup();
 
     int T = 1;
