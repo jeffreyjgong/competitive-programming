@@ -7,6 +7,7 @@ class SegmentTree {
         int size;
         vector<int> tree;
 
+        // builds tree: O(N)
         SegmentTree(vector<int>& arr) {
             this->size = (int) arr.size();
             
@@ -23,6 +24,7 @@ class SegmentTree {
         }
 
         // updates the element at index p to the new value
+        // O(log N)
         void update_node(int p, int value) {
             for(tree[p += this->size] = value; p>1; p>>=1) {
                 tree[p>>1] = tree[p] + tree[p^1];
@@ -30,6 +32,7 @@ class SegmentTree {
         }
 
         // get sum on interval on [l,r)
+        // O(log N)
         int query(int l, int r) {
             int res = 0;
 
@@ -59,9 +62,11 @@ int main() {
 
     SegmentTree st(a);
 
+    // 5
     cout << st.query(1,3) << endl;
 
     st.update_node(2, 1);
 
+    // 3
     cout << st.query(1,3) << endl;
 }
