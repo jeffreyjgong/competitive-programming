@@ -40,6 +40,7 @@ int main() {
 
     ms.push(4);
     ms.push(3);
+    ms.push(100);
     ms.push(2);
 
     cout << ms.minimum() << endl;
