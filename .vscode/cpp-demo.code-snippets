@@ -4,7 +4,8 @@
 	 "body": [
 	  "#include<bits/stdc++.h>",
 	  "#include<ext/pb_ds/assoc_container.hpp>",
-	  "#include<ext/pb_ds/tree_policy.hpp>\n",
+	  "#include<ext/pb_ds/tree_policy.hpp>",
+	  "#include<numeric>\n",
 	  "using ll = long long;",
 	  "using ld = long double;",
 	  "using namespace __gnu_pbds;",
