@@ -30,7 +30,7 @@
 	  "void solve(){",
 	  "\t$0",
 	  "}\n",
-	  "int main() {",
+	  "int32_t main() {",
 	  "\tsetup();\n",
 	  "\tint T = 1;",
 	  "\tcin >> T;",
