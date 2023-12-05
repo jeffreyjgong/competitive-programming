@@ -27,49 +27,35 @@ template<typename T, typename... S> inline void print(T outVar, S... args) {cout
 
 
 void solve(){
-    int n;
-    input(n);
-
-    vector<int> a(n);
-    arrPut(a);
-
+    int n = 0;
+    cin >> n;
+ 
+    vector<int> arr(n);
+    arrPut(arr);
     if (n == 1) {
         cout << 1 << endl;
         return;
     }
-
-    int total_gcd = abs(a[1] - a[0]);
-    int total_max = max(a[1], a[0]);
-
-    unordered_set<int> freq;
-    freq.insert(a[0]);
-    freq.insert(a[1]);
-    
-    for(int i = 2; i<n; i++) {
-        if (total_gcd != 1) total_gcd = gcd(total_gcd, abs(a[i] - a[i-1]));
-
-        total_max = max(total_max, a[i]);
-        freq.insert(a[i]);
+ 
+    sort(arr.rbegin(), arr.rend());
+ 
+    int x = abs(arr[0] - arr[1]);
+    For(i, 0, arr.size()-1) {
+        x = gcd(x, abs(arr[i] - arr[i+1]));
     }
-
-    int num_ops = 0;
-    for(int j = 0; j<n; j++) {
-        num_ops += ((total_max - a[j]) / total_gcd);
-    }
-
-    int i = total_max - total_gcd;
-    int minimum = (long) -1000000000;
-    int num = n;
-    while(num--) {
-        if (freq.find(i) == freq.end()) {
-            cout << num_ops + (abs(total_max - i))/total_gcd << endl;
-            return;
+ 
+    int moves = 0;
+    int target = arr[0];
+    int k = 0;
+    foreach(a, arr) {
+        moves += (target - *a)/x;
+        if (target - k * x == *a) {
+            k++;
         }
-
-        i -= total_gcd;
     }
-
-    cout << num_ops + n << endl;
+    moves += min(k, n);
+ 
+    cout << moves << endl;
 }
 
 int32_t main() {
