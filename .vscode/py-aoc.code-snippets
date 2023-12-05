@@ -1,0 +1,11 @@
+{
+	"Print to console": {
+	 "prefix": "py-aoc",
+	 "body": [
+	  "def read_file(file_path):",
+	  "\twith open(file_path, 'r') as file:",
+      "\t\treturn file.read()\n"
+	 ],
+	 "description": "My Demo py-aoc template"
+	}
+   }
