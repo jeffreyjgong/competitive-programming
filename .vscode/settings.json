@@ -107,5 +107,8 @@
         "stdfloat": "cpp",
         "stop_token": "cpp",
         "syncstream": "cpp"
-    }
+    },
+    "rust-analyzer.linkedProjects": [
+        "./leetcode/rust/Cargo.toml"
+    ]
 }

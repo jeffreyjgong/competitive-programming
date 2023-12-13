@@ -1,0 +1,23 @@
+{
+	"Print to console": {
+	    "prefix": "rust-lc",
+	    "body": [
+	        "#![allow(unused_imports)]\n",
+	        "use std::collections::{",
+            "\tVecDeque, LinkedList,",
+            "\tHashMap, BTreeMap,",
+            "\tHashSet, BTreeSet,",
+            "\tBinaryHeap",
+            "};\n",
+            "use core::cmp::{",
+            "\tEq, PartialEq,",
+            "\tOrd, PartialOrd,",
+            "\tOrdering,",
+            "\tReverse,",
+            "\tmax, min",
+            "};\n",
+            "struct Solution;\n"
+	    ],
+	    "description": "My Demo py-aoc template"
+	}
+}
