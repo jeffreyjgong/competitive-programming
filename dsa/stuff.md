@@ -1,3 +1,7 @@
+# Resources
+
+- [codeforces ITMO course](https://codeforces.com/edu/course/2)
+
 ## Seg Trees
 
 ### Really good resources
