@@ -91,25 +91,32 @@ vector<vector<int>> findComponents(int n, const unordered_map<int, unordered_set
     return result;
 }
 
-void dfs2(int node, const unordered_map<int, unordered_set<int>>& adj, unordered_set<int>& visited) {
-    visited.insert(node);
+void dfs2(int start, int node, const unordered_map<int, unordered_set<int>>& adj, vector<unordered_set<int>>& reachable, vector<int>& visited, int dfsNum) {
+    reachable[start].insert(node);
+    visited[node] = dfsNum;
+
     if (adj.find(node) != adj.end()) {
-        for(int neighbor : adj.at(node)) {
-            if (visited.find(neighbor) == visited.end()) {
-                dfs2(neighbor, adj, visited);
+        for (int neighbor : adj.at(node)) {
+            if (visited[neighbor] != dfsNum) {
+                dfs2(start, neighbor, adj, reachable, visited, dfsNum);
+                reachable[start].insert(reachable[neighbor].begin(), reachable[neighbor].end());
             }
-        }
+        } 
     }
 }
 
 vector<unordered_set<int>> findReachableNodes(int n, const unordered_map<int, unordered_set<int>>& adj) {
     vector<unordered_set<int>> reachable(n+1);
+    vector<int> visited(n+1, -1); // Initialized with -1 indicating unvisited
+    int dfsNum = 0;
 
-    for(int i = 1; i <= n; i++) {
-        unordered_set<int> visited;
-        dfs2(i, adj, visited);
-        reachable[i] = visited;
+    for (int i = 1; i <= n; ++i) {
+        if (visited[i] == -1) { // Perform DFS if the node hasn't been fully explored
+            dfs2(i, i, adj, reachable, visited, dfsNum);
+            ++dfsNum;
+        }
     }
+
     return reachable;
 }
 
@@ -138,6 +145,15 @@ void solve(){
     auto components = findComponents(n, adj);
 
     auto reachableNodes = findReachableNodes(n, adj);
+
+    cout << "Reachable nodes from each node:" << endl;
+    for (int i = 1; i < reachableNodes.size(); ++i) {
+        cout << "From node " << i << ": ";
+        for (int node : reachableNodes[i]) {
+            cout << node << " ";
+        }
+        cout << endl;
+    }
 
     vector<int> possibilities;
 
