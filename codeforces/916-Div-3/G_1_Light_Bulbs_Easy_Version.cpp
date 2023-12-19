@@ -25,6 +25,94 @@ template<typename T, typename... S> inline void print(T outVar, S... args) {cout
 #define setup() ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
 #define int ll
 
+class DisjointSet {
+private:
+    vector<int> parent;
+
+public:
+    DisjointSet(int n) {
+        parent.resize(n);
+        for(int i = 0; i<n; ++i) {
+            parent[i] = i;
+        }
+    }
+
+    int find(int x) {
+        if (parent[x] != x) {
+            parent[x] = find(parent[x]);
+        }
+
+        return parent[x];
+    }
+
+    void unionSets(int x, int y) {
+        int px = find(x);
+        int py = find(y);
+        if (px != py) {
+            parent[px] = py;
+        }
+    }
+};
+
+void dfs(int node, const unordered_map<int, unordered_set<int>>& adj, DisjointSet& ds, vector<bool>& visited) {
+    visited[node - 1] = true;
+    if (adj.find(node) != adj.end()) {
+        for(int neighbor : adj.at(node)) {
+            ds.unionSets(node - 1, neighbor - 1);
+            if (!visited[neighbor-1]) {
+                dfs(neighbor, adj, ds, visited);
+            }
+        }
+    }
+}
+
+vector<vector<int>> findComponents(int n, const unordered_map<int, unordered_set<int>>& adj) {
+    DisjointSet ds(n);
+
+    vector<bool> visited(n, false);
+
+    for(int i = 1; i<=n; i++) {
+        if (!visited[i-1]) {
+            dfs(i, adj, ds, visited);
+        }
+    }
+
+    unordered_map<int, unordered_set<int>> components;
+    for (int i = 0; i < n; ++i) {
+        components[ds.find(i)].insert(i+1);
+    }
+
+    vector<vector<int>> result;
+    for (auto& component : components) {
+        vector<int> comp(component.second.begin(), component.second.end());
+        result.push_back(comp);
+    }
+
+    return result;
+}
+
+void dfs2(int node, const unordered_map<int, unordered_set<int>>& adj, unordered_set<int>& visited) {
+    visited.insert(node);
+    if (adj.find(node) != adj.end()) {
+        for(int neighbor : adj.at(node)) {
+            if (visited.find(neighbor) == visited.end()) {
+                dfs2(neighbor, adj, visited);
+            }
+        }
+    }
+}
+
+vector<unordered_set<int>> findReachableNodes(int n, const unordered_map<int, unordered_set<int>>& adj) {
+    vector<unordered_set<int>> reachable(n+1);
+
+    for(int i = 1; i <= n; i++) {
+        unordered_set<int> visited;
+        dfs2(i, adj, visited);
+        reachable[i] = visited;
+    }
+    return reachable;
+}
+
 void solve(){
     int n;
     input(n);
@@ -42,10 +130,35 @@ void solve(){
     }
 
     for(int i = 1; i<=n; i++) {
-        for(int j = locs[i][0]; j<=locs[i][1]; j++) {
+        for(int j = locs[i][0]+1; j<=locs[i][1]-1; j++) {
             adj[i].insert(lb[j]);
         }
     }
+
+    auto components = findComponents(n, adj);
+
+    auto reachableNodes = findReachableNodes(n, adj);
+
+    vector<int> possibilities;
+
+    for(auto component : components) {
+        int compSize = component.size();
+        int total = 0;
+        for(int i = 0; i<compSize; i++) {
+            if (reachableNodes[component[i]].size() == compSize) {
+                total++;
+            }
+        }
+        possibilities.push_back(total*2);
+    }
+
+    int minimumSize = possibilities[0];
+
+    for(int i = 1; i<possibilities.size(); i++) {
+        minimumSize = (possibilities[i] * minimumSize) % 998244353;
+    }
+
+    cout << components.size() << " " << (minimumSize % 998244353) << endl;
 }
 
 int32_t main() {
