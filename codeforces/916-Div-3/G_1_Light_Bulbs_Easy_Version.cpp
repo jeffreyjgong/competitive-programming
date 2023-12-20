@@ -5,6 +5,7 @@
 
 using ll = long long;
 using ld = long double;
+using pii = pair<int, int>;
 using namespace __gnu_pbds;
 using namespace std;
 template <typename T>
