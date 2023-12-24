@@ -63,8 +63,20 @@ void solve(){
         return;
     }
 
-    // mixed
+    // mixed doesn't work because (continued below)
     if (!all_pos && !all_neg) {
+        // we know we need to apply the operation c_i times for each a_i resulting in m
+        // this will result in p_i = 1+c_i pieces
+        // then we know that
+        // a_i + k(p_i - 1) = mp_i
+        // a_i - k = (m-k)p_i
+        // we know p_i is positive integer
+        // so we know that (a_i - k) must be divisible by (m-k)
+        // additionally, let us assume that there exists an i s.t.
+        // a_i - k < 0. This implies m-k < 0 as well, as p_i > 0
+        // if there exists an i s.t. a_i - k = 0, then this implies m-k = 0
+        // if there exists i s.t. a_i - k > 0. then this implies m-k > 0
+        // as one can clearly see, these conditions cannot exist in the array together, they must be exclusive
         cout << -1 << endl;
     } else {
         // get gcd of whole thing
