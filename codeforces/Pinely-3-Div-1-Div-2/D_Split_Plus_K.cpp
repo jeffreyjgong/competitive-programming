@@ -31,42 +31,64 @@ void solve(){
     input(n, k);
 
     vector<int> a(n);
-    arrPut(a);
 
-    if (n==1) {
+    bool all_neg = true;
+    bool all_pos = true;
+    bool all_zero = true;
+    bool all_same = true;
+    For(i, 0, n) {
+        int a_elem;
+        input(a_elem);
+        a[i] = a_elem - k;
+
+        if (a[i] != a[0]) {
+            all_same = false;
+        }
+        
+        if (a[i] < 0) {
+            all_pos = false;
+            all_zero = false;
+        } else if (a[i] == 0) {
+            all_neg = false;
+            all_pos = false;
+        } else {
+            all_neg = false;
+            all_zero = false;
+        }
+    }
+
+    // already all same (all_zero is subset of all_same but for readability)
+    if (all_same || all_zero) {
         cout << 0 << endl;
         return;
     }
-    int sum = 0;
 
-    bool less_k = false;
-    bool greater_k = false;
-    bool all_equal = true;
-
-    for(int i = 0; i<a.size(); i++) {
-        if (a[i] < k) {
-            less_k = true;
-        }
-
-        if (a[i] > k) {
-            greater_k = true;
-        }
-
-        if (i > 0) {
-            if (a[i] != a[i-1]) {
-                all_equal = false;
-            }
-        }
-
-        sum += a[i];
-    }
-
-    if (less_k && greater_k) {
+    // mixed
+    if (!all_pos && !all_neg) {
         cout << -1 << endl;
-        return;
-    }
+    } else {
+        // get gcd of whole thing
+        int g = a[0];
+        For(i, 1, n) {
+            g = __gcd(g, a[i]);
+        }
 
-    // bruh
+        // c is num of times to apply to operation
+        // a_i + ck = m*(1 + c) because c operations create 1+c pieces
+        // solve for c
+        // c = (a_i - m)/(m-k) 
+        // m - k is gcd and m = gcd+k
+        // thus c = (a_i - gcd - k) / (gcd) = (a_i - k)/gcd - 1
+        // and a_i is already -= k, so just (a[i]/g) - 1
+        
+        int num_ops = 0;
+        For(i, 0, n) {
+            num_ops += (a[i]/g) - 1;
+        }
+
+        cout << num_ops << endl;
+    }
+    
 }
 
 int32_t main() {
