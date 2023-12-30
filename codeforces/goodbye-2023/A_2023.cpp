@@ -40,6 +40,7 @@ void solve(){
             start *= a[i];
             if (start > 2023) {
                 cout << "NO" << endl;
+                return;
             }
         } else {
             cout << "NO" << endl;
