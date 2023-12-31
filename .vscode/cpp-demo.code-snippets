@@ -30,6 +30,7 @@
 	  "#define int ll",
 	  "#define uint ull",
 	  "#define odd(x) (x & 1)",
+	  "#define all(x) x.begin(), x.end()",
 	  "typedef pair<int, int> pii;\n",
 	  "void solve(){",
 	  "\t$0",
