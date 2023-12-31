@@ -27,6 +27,7 @@
 	  "#define ss second",
 	  "#define setup() ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)",
 	  "#define int ll",
+	  "#define odd(x) (x & 1)",
 	  "typedef pair<int, int> pii;\n",
 	  "void solve(){",
 	  "\t$0",
