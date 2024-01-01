@@ -8,6 +8,7 @@ pub mod _208;
 pub mod _211;
 pub mod _212;
 pub mod _79;
+pub mod _1791;
 
 use std::collections::{
     VecDeque, LinkedList,
