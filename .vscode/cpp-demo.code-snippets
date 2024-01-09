@@ -31,6 +31,8 @@
 	  "#define uint ull",
 	  "#define odd(x) (x & 1)",
 	  "#define all(x) x.begin(), x.end()",
+	  "#define sz(x) (int)(x).size()",
+	  "#define mp make_pair",
 	  "typedef pair<int, int> pii;\n",
 	  "void solve(){",
 	  "\t$0",

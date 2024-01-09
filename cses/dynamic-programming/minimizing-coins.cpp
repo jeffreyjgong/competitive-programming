@@ -28,6 +28,8 @@ template<typename T, typename... S> inline void println(T outVar, S... args) {co
 #define uint ull
 #define odd(x) (x & 1)
 #define all(x) x.begin(), x.end()
+#define mp make_pair
+#define sz(x) (int)(x).size()
 typedef pair<int, int> pii;
 
 int32_t main() {
@@ -39,6 +41,23 @@ int32_t main() {
     vector<int> coins(n);
     arrPut(coins);
 
+    int dp[s+1];
+    For(i, 0, s+1) {
+        dp[i] = INT_MAX;
+    }
+    dp[0] = 0;
 
+
+    // dp[i] is the minimum number of coins needed to get to weight i
+
+    for(int weight = 1; weight <= s; weight++) {
+        for(int coin = 0; coin < n; coin++) {
+            if (weight - coins[coin] >= 0) {
+                dp[weight] = min(dp[weight], dp[weight - coins[coin]] + 1);
+            }
+        }
+    }
+
+    cout << (dp[s] == INT_MAX ? -1 : dp[s]) << endl;
     return 0;
 }
