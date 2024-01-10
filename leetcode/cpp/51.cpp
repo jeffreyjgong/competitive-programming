@@ -44,6 +44,7 @@ private:
     void solve(vector<vector<string>>& res, vector<string>& nQueens, tuple<int, int, int>& flag_col_45_135, int row, int n) {
         if (row == n) {
             res.push_back(nQueens);
+            return;
         }
 
         for(int col = 0; col<n; col++) {
