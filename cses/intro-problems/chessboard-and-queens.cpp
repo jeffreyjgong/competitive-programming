@@ -34,6 +34,48 @@ int inline get1D(int r, int c) {
     return 8*r + c;
 }
 
+inline bool bitmaskClear(int index, int bitmask) {
+    return (bitmask & (1 << index)) == 0;
+}
+
+inline void setBitmask(int index, int& bitmask) {
+    bitmask = bitmask | (1 << index);
+}
+
+inline void unsetBitmask(int index, int& bitmask) {
+    bitmask = bitmask & ~(1 << index);
+}
+
+inline int which45(int row, int col) {
+    return 8 - (row - col);
+}
+
+inline int which135(int row, int col) {
+    return row+col;
+}
+
+void solve(int& res, const bitset<64>& board, tuple<int, int, int>& flag_col_45_135, int row) {
+    if (row == 8) {
+        res++;
+        return;
+    }
+
+    for(int col = 0; col < 8; col++) {
+        if (board.test(get1D(row, col))) {
+            continue;
+        }
+        if (
+            bitmaskClear(col, get<0>(flag_col_45_135)) && 
+            bitmaskClear(which45(row, col), get<1>(flag_col_45_135)) && 
+            bitmaskClear(which135(row, col), get<2>(flag_col_45_135))
+        ) {
+            setBitmask(col, get<0>(flag_col_45_135)); setBitmask(which45(row, col), get<1>(flag_col_45_135)); setBitmask(which135(row, col), get<2>(flag_col_45_135));
+            solve(res, board, flag_col_45_135, row+1);
+            unsetBitmask(col, get<0>(flag_col_45_135)); unsetBitmask(which45(row, col), get<1>(flag_col_45_135)); unsetBitmask(which135(row, col), get<2>(flag_col_45_135));
+        }
+    }
+}
+
 int32_t main() {
     setup();
 
@@ -51,6 +93,11 @@ int32_t main() {
         }
         line++;
     }
+
+    int res;
+
+    tuple<int, int, int> flag_col_45_135 = {0, 0, 0};
+    solve(res, board, flag_col_45_135, 0);
 
     
     return 0;
