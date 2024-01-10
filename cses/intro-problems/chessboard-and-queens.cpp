@@ -94,11 +94,11 @@ int32_t main() {
         line++;
     }
 
-    int res;
+    int res = 0;
 
     tuple<int, int, int> flag_col_45_135 = {0, 0, 0};
     solve(res, board, flag_col_45_135, 0);
 
-    
+    cout << res << endl;
     return 0;
 }
