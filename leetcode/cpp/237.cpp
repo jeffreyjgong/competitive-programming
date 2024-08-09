@@ -12,13 +12,7 @@ class Solution {
 public:
     void deleteNode(ListNode* node) {
         // start and copy the next value
-        while(node->next != nullptr) {
-            ListNode * remNext = node->next;
-            node->val = node->next->val;
-            if (node->next->next == nullptr) {
-                node->next = nullptr;
-            }
-            node = remNext;
-        }
+        node->val = node->next->val;
+        node->next = node->next->next;
     }
 };
